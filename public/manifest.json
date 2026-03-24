@@ -1,0 +1,73 @@
+{
+  "name": "ShopSimply — E-commerce Maroc",
+  "short_name": "ShopSimply",
+  "description": "Lance ta boutique e-commerce au Maroc en 48h avec l'IA",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#1E2761",
+  "theme_color": "#1E2761",
+  "orientation": "portrait",
+  "lang": "fr-MA",
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["business", "shopping"],
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tableau de bord ShopSimply"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nouvelle commande",
+      "short_name": "Commande",
+      "url": "/crm/commandes/nouveau",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Assistant IA",
+      "short_name": "ShopAI",
+      "url": "/assistant",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Calculateur COD",
+      "short_name": "Calc COD",
+      "url": "/outils/calculateur-cod",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ]
+}
