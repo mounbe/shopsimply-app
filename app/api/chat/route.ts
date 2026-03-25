@@ -7,10 +7,24 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 // Limites journalières par plan
 const RATE_LIMITS: Record<string, number> = {
-  trial:   20,
+  trial:    20,
   starter: 60,
   pro:     200,
   scale:   Infinity,
+}
+
+interface UserContext {
+  userName?: string
+  niche?: string
+  model?: string
+  platform?: string
+  progress?: number
+  currentWeek?: number
+}
+
+interface ChatMessage {
+  role: 'user' | 'assistant'
+  content: string
 }
 
 // System prompt adaptatif au contexte utilisateur
@@ -49,20 +63,6 @@ LIMITES :
 - Reste focalisé sur l'e-commerce marocain`
 }
 
-interface UserContext {
-  userName?: string
-  niche?: string
-  model?: string
-  platform?: string
-  progress?: number
-  currentWeek?: number
-}
-
-interface ChatMessage {
-  role: 'user' | 'assistant'
-  content: string
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -84,10 +84,10 @@ export async function POST(request: NextRequest) {
       {
         cookies: {
           getAll() { return cookieStore.getAll() },
-          setAll(cookiesToSet) {
+          setAll(cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) {
             try {
               cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options)
+                cookieStore.set(name, value, options as any)
               )
             } catch {}
           },
@@ -119,7 +119,6 @@ export async function POST(request: NextRequest) {
           .gte('created_at', since)
 
         const callCount = count ?? 0
-
         if (callCount >= dailyLimit) {
           return new Response(
             JSON.stringify({
@@ -138,7 +137,6 @@ export async function POST(request: NextRequest) {
             }
           )
         }
-
         // Enregistrer l'appel (non-bloquant)
         supabase
           .from('ai_usage')
